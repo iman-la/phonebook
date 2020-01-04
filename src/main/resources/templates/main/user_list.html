@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragment/header.html::headFragment">
+</head>
+<body>
+<th:block th:insert="fragment/header.html::navbarFragment"></th:block>
+
+
+<div class="container">
+
+
+    <div class="row">
+
+
+        <div class="col-12">
+
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Family</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="personObj:${pList}">
+                    <td>#</td>
+                    <td th:text="${personObj.getFirstName()}"></td>
+                    <td th:text="${personObj.getLastName()}"></td>
+                    <td>
+
+                        <a th:href="@{'/person/detail?pid='+${personObj.getPerson_id()}}"
+                           class="btn btn-success btn-sm"> Detail </a>
+                        <a th:href="@{'/person/edit?pid='+${personObj.getPerson_id()}}" class="btn btn-warning btn-sm">
+                            Edit </a>
+                        <a th:href="@{'/person/delete?pid='+${personObj.getPerson_id()}}" class="btn btn-danger btn-sm">
+                            Delete </a>
+
+
+                    </td>
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="modal fade" id="newPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+
+            <form method="post" action="/person/new">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Person</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Family</label>
+                        <input type="text" name="family" class="form-control" placeholder="Enter Family" required>
+                    </div>
+f
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

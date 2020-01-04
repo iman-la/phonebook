@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:insert="fragment/header.html::headFragment">
+</head>
+<body>
+<th:block th:insert="fragment/header.html::navbarFragment"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 th:text="${personInfo.getFirstName()+' '+personInfo.getLastName()}"></h1>
+            <h4>Phone List</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Number</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phoneObj : ${phoneList}">
+                    <td th:text="${phoneObj.getTitle()}"></td>
+                    <td th:text="${phoneObj.getNumber()}"></td>
+                    <td>
+                        <a th:href="@{'/phone/edit?pid='+${phoneObj.getPhone_id()}}" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                        <a th:href="@{'/phone/delete?pid='+${phoneObj.getPhone_id()}}" class="btn btn-danger btn-sm">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <form method="post" action="/phone/new">
+                <input type="text" name="title">
+                <input type="text" name="number">
+                <input type="text" name="pid" th:value="${personInfo.getPerson_id()}">
+                <button type="submit">Save New Phone</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
